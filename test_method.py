@@ -36,3 +36,15 @@ class TestCookieRequest(TestCase):
             'name': 'token'
         })
         print(resp.text)
+
+
+class TestOrderRequest(TestCase):
+    url = 'http://localhost:8000/order/1/1'
+
+    def test_get(self):
+        resp = requests.get(self.url)
+        print(resp.text)
+
+    def test_post(self):
+        resp = requests.post(self.url)
+        print(resp.text)

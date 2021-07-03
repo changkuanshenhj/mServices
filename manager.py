@@ -148,7 +148,20 @@ class OrderHandler(tornado.web.RequestHandler):
             if item.get('id') == order_id:
                 return item
 
+    def initialize(self):
+        # 所有的请求方法在调用之前，都会进行初始化操作
+        print('-----------initialize------------')
+
+    def prepare(self):
+        # 初始化之后，调用行为方法之前，调用此方法进行预处理
+        print('--------prepare---------')
+
+    def post(self, order_id, action_code):
+        print('----------post----------')
+        self.write('------post----------')
+
     def get(self, order_id, action_code):
+        print('----------get----------')
         self.write('订单查询')
         html = """
             <p>
@@ -165,6 +178,9 @@ class OrderHandler(tornado.web.RequestHandler):
         self.write(html % (good.get('id'), good.get('name'), good.get('price')))
         # self.write(self.query(int(order_id)))
         self.write(self.action_map.get(int(action_code)))
+
+    def on_finish(self):
+        print('-------on_finish-------')
 
 
 def make_app():
