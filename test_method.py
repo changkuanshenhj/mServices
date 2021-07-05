@@ -55,7 +55,7 @@ class TestUserRequest(TestCase):
 
     def test_login(self):
         # 上传json数据
-        resp = requests.get(self.url,
+        resp = requests.post(self.url,
                             json={
                                 'name': 'cxk',
                                 'pwd': '123'

@@ -16,7 +16,14 @@ class LoginHandler(RequestHandler):
         'last_login_device': 'Android 5.1 OnePlus5'
     }]
 
-    def get(self):
+    def set_default_headers(self):
+        # 所有的请求方法执行后，默认设置的响应头的信息
+        # 以下设置响应头都是解决跨域问题
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Access-Control-Allow-Headers', 'Content-Type, x-requested-with')
+        self.set_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+
+    def post(self):
         # 读取json数据
         bytes = self.request.body  # 字节类型
         print(bytes)
@@ -50,7 +57,11 @@ class LoginHandler(RequestHandler):
         else:
             self.write('upload data 必选是json格式')
 
-    def post(self):
+    def options(self):
+        # 跨域请求时，会被客户端请求，用来表示服务器是否支持跨域请求
+        self.set_status(200)
+
+    def get(self):
         pass
 
     def put(self):
