@@ -48,3 +48,17 @@ class TestOrderRequest(TestCase):
     def test_post(self):
         resp = requests.post(self.url)
         print(resp.text)
+
+
+class TestUserRequest(TestCase):
+    url = 'http://localhost:8000/user'
+
+    def test_login(self):
+        # 上传json数据
+        resp = requests.get(self.url,
+                            json={
+                                'name': 'cxk',
+                                'pwd': '123'
+                            })
+        # 读取响应的json数据
+        print(resp.json())
