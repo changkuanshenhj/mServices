@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+{#    <link rel="stylesheet" href="/s/css/my.css">#}
+     <link rel="stylesheet" href="{{ static_url('css/my.css') }}">
+</head>
+<body>
+<h1>我是主页</h1>
+<nav>
+    <ul>
+        {% for menu in  menus%}
+            <li>{{ menu }}</li>
+        {% end %}
+
+    </ul>
+</nav>
+<p>
+    {{ msg }}
+</p>
+<p>
+    {{ 'hi kobe '[-4:] }}
+</p>
+<p>
+    {{ len('hi,cxkshuaishuai') }}
+</p>
+<p>
+    {{ ','.join([str(x**2) for x in range(1, 10)]) }}
+{#    结果输出必须是字符串才可以不出错哦#}
+</p>
+<p>
+    {% if error_msg %}
+        <span class="error"> {{ error_msg }}</span>
+        {% else %}
+        <span>您来对地方了</span>
+    {% end %}
+</p>
+<p>
+    {% if age < 18 %}
+        <span class="error">未成年人禁足</span>
+    {% elif age > 60 %}
+        <span class="warn">老人家不易进入</span>
+    {% else %}
+        <span class="success">正常</span>
+    {% end %}
+</p>
+<p>
+    {{ escape(code) }}
+</p>
+<p>
+    <textarea>{{ escape(code) }}</textarea>
+</p>
+</body>
+</html>

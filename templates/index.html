@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{#{% block nav %}#}
+{#<nav>#}
+{#    <ul>#}
+{#        {% for menu in  menus%}#}
+{#            <li>{{ menu }}</li>#}
+{#        {% end %}#}
+{#    </ul>#}
+{#</nav>#}
+{##}
+{#{% end %}#}
+{% block nav %}
+    {% module Nav(menus) %}
+{% end %}
+{% block content %}
+    <div id="left">
+        {% module Menu() %}
+    </div>
+    <div id="right">
+        <iframe name="content" frameborder="0"></iframe>
+    </div>
+{% end %}
+{% block js %}
+    <p>大家好啊，哈哈哈哈</p>
+{% end %}

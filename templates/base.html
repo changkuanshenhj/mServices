@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            常坤的主页
+        {% end %}
+    </title>
+    <link rel="stylesheet" href="{{ static_url('css/my.css') }}">
+    {% block css %}{% end %}
+</head>
+<body>
+<div id="nav">{% block nav %}{% end %}</div>
+<div id="content">{% block content %}{% end %}</div>
+<div id="footer">{% block footer %}{% end %}</div>
+{% block js %}{% end %}
+</body>
+</html>
