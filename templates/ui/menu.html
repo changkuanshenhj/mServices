@@ -1,7 +1,8 @@
 <ul>
     {% for menu in menus %}
         <li>
-            <a href="{{ menu['url'] }}" target="content">{{ menu['title'] }}</a>
+{#            <a href="{{ menu['url'] }}" target="content">{{ menu['title'] }}</a>#}
+            <a href="{{ menu.url}}" target="content">{{ menu.title }}</a>
         </li>
     {% end %}
 </ul>

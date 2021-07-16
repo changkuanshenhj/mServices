@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Referrer" content="no-referrer">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户登录</title>
+</head>
+<body>
+    <button onclick="login()">登录</button>
+    <div id="result"></div>
+    <script>
+    function $(id) {
+        return document.getElementById(id)
+    }
+    function login() {
+        let req = new XMLHttpRequest();
+        req.open('post', 'http://localhost:8000/user', true);
+        req.setRequestHeader('Content-Type', 'application/json');
+        req.onload = function (e) {
+        if (req.status == 200 && req.readyState == 4){
+            data = JSON.parse(req.responseText);
+            $('result').innerHTML = data.msg;
+        }
+    };
+
+    req.send(JSON.stringify({
+        'name': 'cxk',
+        'pwd': '123'
+    }))
+    }
+</script>
+<!--<script>-->
+<!--    function $(id) {-->
+<!--        return document.getElementById(id)-->
+<!--    }-->
+
+<!--    function login() {-->
+<!--        let options = {-->
+<!--            method: 'post',-->
+<!--            body: JSON.stringify({-->
+<!--                'name': 'cxk',-->
+<!--                'pwd': '123'-->
+<!--            }),-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json'-->
+<!--            },-->
+<!--            mode: 'cors'-->
+<!--        };-->
+<!--        fetch('http://localhost:8000/user', options)-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                $('result').innerHTML = data.msg;-->
+<!--            })-->
+
+<!--    }-->
+<!--</script>-->
+</body>
+</html>
