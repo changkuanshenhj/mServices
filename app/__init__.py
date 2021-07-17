@@ -8,6 +8,7 @@ from app.views.index_v import IndexHandler
 from app.views.search_v import SearchHandler
 from app.views.cookie_v import CookieHandler
 from app.views.order_v import OrderHandler
+from app.views.download import DownloadHandler, AsyncDownloadHandler, Async2DownloadHandler
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # D:/python_tornado/microServer/app/__init__.py
@@ -29,5 +30,8 @@ def make_app(host='localhost'):
         ('/', IndexHandler),
         ('/search', SearchHandler),
         ('/cookie', CookieHandler),
+        ('/download', DownloadHandler),
+        ('/download1', AsyncDownloadHandler),
+        ('/download2', Async2DownloadHandler),
         (r'/order/(?P<action_code>\d+)/(?P<order_id>\d+)', OrderHandler)
     ], default_host=host, **settings)
