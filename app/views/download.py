@@ -78,7 +78,7 @@ class Async2DownloadHandler(RequestHandler):
         # 获取查询参数中的url（下载资源的网址）
         url = self.get_query_argument('url')
         self.write('下载中.......')
-        # 发起异步请求
+        # 同步方式发送请求，但和HTTPClient()又不一样
         client = AsyncHTTPClient()
         # validate_cert 是否验证SSL安全连接的证书
         response = await client.fetch(url, validate_cert=False)
@@ -91,7 +91,7 @@ class Async2DownloadHandler(RequestHandler):
     #     # 获取查询参数中的url（下载资源的网址）
     #     url = self.get_query_argument('url')
     #     self.write('下载中.......')
-    #     # 发起异步请求
+    #     # 同步方式发送请求，但和HTTPClient()又不一样
     #     client = AsyncHTTPClient()
     #     # validate_cert 是否验证SSL安全连接的证书
     #     response = yield client.fetch(url, validate_cert=False)
