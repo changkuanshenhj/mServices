@@ -37,7 +37,7 @@ class MessageHandler(WebSocketHandler):
     def open(self):  # 表示客户请求连接
         # ip = self.request.remote_ip  获取当前登录的ip
 
-        # self.online_clients.append(self)与下面的代码等价
+        # self.online_clients.append(self)与下面的代码等价  online_clients相对于是公共的。
         MessageHandler.online_clients.append(self)
         username = self.get_secure_cookie('username').decode()
         # 向客户端发送消息
