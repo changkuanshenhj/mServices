@@ -36,7 +36,9 @@ class MessageHandler(WebSocketHandler):
 
     def open(self):  # 表示客户请求连接
         # ip = self.request.remote_ip  获取当前登录的ip
-        self.online_clients.append(self)
+
+        # self.online_clients.append(self)与下面的代码等价
+        MessageHandler.online_clients.append(self)
         username = self.get_secure_cookie('username').decode()
         # 向客户端发送消息
         self.send_all("%s 进入聊天室" % username)
@@ -48,4 +50,5 @@ class MessageHandler(WebSocketHandler):
         self.send_all(msg)
 
     def on_connection_close(self):
-        self.online_clients.remove(self)
+        # self.online_clients.remove(self)
+        MessageHandler.online_clients.remove(self)
