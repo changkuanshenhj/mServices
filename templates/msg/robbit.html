@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客服在线</title>
+    <style>
+        .success{
+            color: green;
+        }
+        .error{
+            color: orange;
+        }
+        #message_body{
+            height: 200px;
+            border: 1px solid lightgray;
+            padding: 5px;
+            background-color: cornsilk;
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+<h1>聊天室</h1>
+<div id="message_body"></div>
+<div>
+    <input id="msg"><button>发送</button>
+</div>
+<script>
+    function $(id) {
+        return document.getElementById(id)
+    }
+
+    window.onload = function (ev) {
+        var socket = new WebSocket('ws://localhost:8000/message')
+        //接收服务端发送过来的信息时的回调函数
+        socket.onmessage = function (ev2) {
+            //console.log('-------onmessage----------');
+            //console.log(ev2);
+            data = ev2.data;
+            $('message_body').innerHTML += '<br>' + data;
+        };
+
+        var btn = document.getElementsByTagName('button')[0];
+        btn.addEventListener('click', function (e) {
+            msg = $('msg').value;
+            socket.send(msg); //向服务端发送数据
+        })
+    }
+</script>
+</body>
+</html>

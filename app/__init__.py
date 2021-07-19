@@ -9,6 +9,8 @@ from app.views.search_v import SearchHandler
 from app.views.cookie_v import CookieHandler
 from app.views.order_v import OrderHandler
 from app.views.download import DownloadHandler, AsyncDownloadHandler, Async2DownloadHandler
+from app.views.message import RobbitHandler, MessageHandler
+from app.views.user import UserHandler
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # D:/python_tornado/microServer/app/__init__.py
@@ -20,7 +22,8 @@ settings = {
     'ui_modules': {
         'Nav': NavModule,
         'Menu': MenuModule
-    }
+    },
+    'cookie_secret': '&sfsjf943dkvd3sds'
 }
 
 
@@ -33,5 +36,8 @@ def make_app(host='localhost'):
         ('/download', DownloadHandler),
         ('/download1', AsyncDownloadHandler),
         ('/download2', Async2DownloadHandler),
+        ('/robbit', RobbitHandler),
+        ('/message', MessageHandler),
+        ('/login', UserHandler),
         (r'/order/(?P<action_code>\d+)/(?P<order_id>\d+)', OrderHandler)
     ], default_host=host, **settings)

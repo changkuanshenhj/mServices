@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客服在线</title>
+    <style>
+        .success{
+            color: green;
+        }
+        .error{
+            color: orange;
+        }
+    </style>
+</head>
+<body>
+<h1>网上咨询</h1>
+<div id="message_body"></div>
+<div>
+    您的幸运数字: <span id="number"></span>
+</div>
+<script>
+    function $(id) {
+        return document.getElementById(id)
+    }
+
+    window.onload = function (ev) {
+        var socket = new WebSocket('ws://localhost:8000/message')
+
+        //设置打开socket连接的回调函数
+        socket.onopen = function (ev2) {
+            console.log('------onopen------');
+            console.log(ev2);
+        }
+
+        var numberIsStarted = false;
+        //接收服务端发送过来的信息时的回调函数
+        socket.onmessage = function (ev2) {
+            console.log('-------onmessage----------');
+            console.log(ev2);
+            data = ev2.data;
+            if(data == 'starting'){
+                numberIsStarted = true;
+            }else if(data == 'end'){
+                numberIsStarted = false;
+            }else if(numberIsStarted){
+                if(parseInt(data) <= 200)
+                    $('number').setAttribute('class', 'error');
+                else
+                    $('number').setAttribute('class', 'success');
+                $('number').innerText = data;
+            } else {
+                $('message_body').innerHTML += '<br>' + data;
+            }
+        };
+
+        //接收到错误信息的回调函数
+        socket.onerror = function (ev2) {
+            console.log('-----------onerror-------------')
+            console.log(ev2);
+        }
+    }
+</script>
+</body>
+</html>
